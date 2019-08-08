@@ -13,26 +13,31 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class Categoria implements Serializable {
+public class Produto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String nome;
+	private String name;
+	private Double preco;
 	
-	@ManyToMany(mappedBy ="categorias")
-	private List<Produto> produtos = new ArrayList<>();
-
-	public Categoria() {
-
-	}
-
-	public Categoria(Integer id, String nome) {
+	@ManyToMany
+	@JoinTable(name = "PRODUTO_CATEGORIA", 
+	joinColumns = @JoinColumn(name = "produto_id"), 
+	inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+	private List<Categoria> categorias = new ArrayList<>();
+	
+	public Produto(Integer id, String name, Double preco) {
 		super();
 		this.id = id;
-		this.nome = nome;
+		this.name = name;
+		this.preco = preco;
+	}
+
+	public Produto() {
+		
 	}
 
 	public Integer getId() {
@@ -43,25 +48,28 @@ public class Categoria implements Serializable {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public List<Produto> getProdutos() {
-		return produtos;
+	public Double getPreco() {
+		return preco;
 	}
 
-	public void setProdutos(List<Produto> produtos) {
-		this.produtos = produtos;
+	public void setPreco(Double preco) {
+		this.preco = preco;
 	}
 
-	@Override
-	public String toString() {
-		return "Categoria [id=" + id + ", nome=" + nome + "]";
+	public List<Categoria> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
 	}
 
 	@Override
@@ -80,13 +88,18 @@ public class Categoria implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Categoria other = (Categoria) obj;
+		Produto other = (Produto) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Produto [id=" + id + ", name=" + name + ", preco=" + preco + ", categorias=" + categorias + "]";
 	}
 
 }
