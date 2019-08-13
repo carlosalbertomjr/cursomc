@@ -1,6 +1,7 @@
 package com.cursomc;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -42,6 +43,13 @@ public class CursomcApplication implements CommandLineRunner {
 		
 		repoCategoria.saveAll(Arrays.asList(cat1, cat2));
 		repoProduto.saveAll(Arrays.asList(p1,p2,p3));
+		
+		Optional<Produto> p4 = repoProduto.findById(1);
+		if (p4 != null) {
+			System.out.println(p4);
+		} else {
+		  System.out.println("not found!");
+		}
 	}
  
 }
