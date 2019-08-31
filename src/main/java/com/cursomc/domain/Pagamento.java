@@ -10,8 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -36,7 +35,8 @@ public class Pagamento implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "pedido_id")
 	@MapsId
-	@JsonBackReference	//@JsonBackReference não permite que o pedido seja serializado 
+	//@JsonBackReference	//@JsonBackReference não permite que o pedido seja serializado
+	@JsonIgnore // substituiu o @JsonBackReference por problemas na serializção
 	private Pedido pedido;
 	
 	public Pagamento() {

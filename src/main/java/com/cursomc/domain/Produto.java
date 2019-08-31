@@ -15,10 +15,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Produto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -29,7 +29,8 @@ public class Produto implements Serializable {
 	private String name;
 	private Double preco;
 	
-	@JsonBackReference
+//	@JsonBackReference
+	@JsonIgnore // substituiu o @JsonBackReference por problemas na serializção
 	@ManyToMany
 	@JoinTable(name = "PRODUTO_CATEGORIA", 
 	joinColumns = @JoinColumn(name = "produto_id"), 
