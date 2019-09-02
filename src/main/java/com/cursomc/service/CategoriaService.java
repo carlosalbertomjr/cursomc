@@ -46,8 +46,9 @@ public class CategoriaService {
 			throw new DataIntegrityException("Não é possível excluir uma categoria que possui produtos");
 		}
 	}
-
+	
 	public Categoria insert(Categoria obj) {
+		obj.setId(null);
 		return repo.save(obj);		
 	}
 
