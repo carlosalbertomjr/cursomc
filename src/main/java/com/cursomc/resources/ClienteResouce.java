@@ -2,6 +2,8 @@ package com.cursomc.resources;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +37,7 @@ public class ClienteResouce {
 	}
 	
 	@PostMapping
-	public ResponseEntity<URI> insert(@RequestBody ClienteNewDTO obj) {
+	public ResponseEntity<URI> insert(@Valid @RequestBody ClienteNewDTO obj) {
 		Cliente cliente = service.fromDTO(obj);
 		Cliente newClient = service.insert(cliente);
 		URI url = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newClient.getId()).toUri();
@@ -43,7 +45,7 @@ public class ClienteResouce {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Cliente> update(@RequestBody ClienteDTO clienteDTO, @PathVariable("id") Integer id) {
+	public ResponseEntity<Cliente> update(@Valid @RequestBody ClienteDTO clienteDTO, @PathVariable("id") Integer id) {
 		Cliente obj = service.fromDTO(clienteDTO);
 		obj.setId(id);
 		obj = service.update(obj);
