@@ -8,16 +8,13 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-
-import org.hibernate.validator.constraints.br.CPF;
 
 import com.cursomc.domain.enums.TipoCliente;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -32,7 +29,7 @@ public class Cliente implements Serializable {
 	private Integer id;
 	//@NotEmpty(message = "Nome inválido")
 	private String nome;
-	//@Email
+	@Column(unique = true)
 	private String email;
 	//	@CPF
 	private String cpfOuCnpj;
