@@ -26,7 +26,7 @@ public class Produto implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String name;
+	private String nome;
 	private Double preco;
 	
 //	@JsonBackReference
@@ -55,7 +55,7 @@ public class Produto implements Serializable {
     public Produto(Integer id, String name, Double preco) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.nome = name;
 		this.preco = preco;
 	}
 	
@@ -71,12 +71,12 @@ public class Produto implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public Double getPreco() {
@@ -130,7 +130,7 @@ public class Produto implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Produto [id=" + id + ", name=" + name + ", preco=" + preco + "]";
+		return "Produto [id=" + id + ", name=" + nome + ", preco=" + preco + "]";
 	}
 
 }
